@@ -1,0 +1,124 @@
+接口回调：接口类声明的接口变量，可以调用到被类重写接口的方法；
+package com.test;
+
+interface ShowMessage{
+	void 显示商标(String s);
+}
+class TV implements ShowMessage{
+
+	@Override
+	public void 显示商标(String s) {
+		// TODO Auto-generated method stub
+		System.out.println(s);
+	}
+	class PC implements ShowMessage {
+
+		@Override
+		public void 显示商标(String s) {
+			// TODO Auto-generated method stub
+			System.out.println(s);
+		}
+		
+	}
+	
+}
+public class TesT1 {
+      public static void main(String args[]){
+    	  ShowMessage sm;
+    	  sm =new TV();
+    	  sm.显示商标("长城牌电视机");
+    	  
+      }
+}
+ ShowMessage接口声明了一个接口变量sm,sm被类创建了一个对象，那么该接口变量可以调用被类重写的方法 显示商标（String s）；
+
+
+
+
+
+如何将Myeclipse 和MySql进行连接执行增删差改操作
+
+For example 
+ Student 表
+num   name   sex  
+ 1     猪     男
+
+
+在myeclipse 创建DBUtil将连接进行封装，在操作数据库数据的代码中：
+  
+   ①查询操作
+ 
+ 代码  例：Class.forName("com.mysql.jdbc.Driver");   //加载驱动SQL的程序
+           
+           Connection conn=DriverManager.getConnection(url,name,password);   //获得数据库连接
+ 
+           PreparedStatement ps=conn.prepareStatement("select *from student");//与数据库连接进行数据库的操作        
+
+           ResultSet rs =ps.executeQuery(); /*
+                                              executeQuery 用来执行SQL中Select语句
+
+   					      executeUpdate 用来执行 SQL中 Insert ,update,delete  execulteUpate 的返回值是一个整数，是指							                                                            受影响的行数（即更新计数）
+                                              execute  用于执行返回多个结果集，多个更新计数或二者组合的语句。 它能够返回多个Resultset对象
+ 					               与更新计数的组合时使用 
+
+
+                               		    */
+	   while (rs.next())   /*  
+				① while(rs.next()) 是表示将rs中的数据进行全部读取
+                                ② if(rs.next())  是表示判断rs中是否有数据只读取一次
+                                */
+
+
+		{
+                     student stu=new student ;   // 将实体进行实例化，new一个student的实体 stu
+ 		  
+                     stu.setName(rs.getString("name"));
+ 		  
+                     stu.setSex(rs.getSex("sex"));  //  分别将rs中查询的数据放入到stu中，setName 将rs中的"name"数据放入stu的name中
+                                                          
+		 }
+
+   ②添加操作 
+
+代码   例：Class.forName("com.mysql.jdbc.Driver"）;
+            
+           connection conn =DriverManaer.getConnecttion (url,name,password);
+           
+           PreparedStatement ps=conn.prepareStatement("insert into  student(name,sex) values(?,?) ");// 插入语句的SQL操作
+           
+           int i=ps.executeUpdate();   
+        
+           ps.setInt(1,3);
+           ps.setString(2,"牛");
+           ps.setString(3,"女");    /*
+                                       在数据库的student表中插入数据，1表示语句中第一个问号 "女"表示该参数所赋的值
+           
+                                     */
+ Student 表
+num   name   sex  
+ 1     猪     男
+ 3     牛     女
+
+
+
+drop table 表名称                     将整个表去除
+truncate table 表名称                 将表中的数据清空不删除表的结构
+delete from 表名称 where 列名称=值    将表中的行删除，删除的操作作为事务记录在日志中保存
+ 
+      
+           
+
+                                            
+
+
+
+
+
+
+
+
+
+
+
+              
+              
